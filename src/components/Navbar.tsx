@@ -5,7 +5,6 @@ import ShopIcon from "@/assets/Navbar/ShopIcon";
 import UserIcon from "@/assets/Navbar/UserIcon";
 import { cn } from "@/lib/utils";
 import { Link } from "react-router-dom";
-import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import MenuSolution from "./Menu/MenuSolution";
 import MenuProducts from "./Menu/MenuProducts";
@@ -13,6 +12,7 @@ import MenuPartners from "./Menu/MenuPartners";
 import MenuService from "./Menu/MenuService";
 import MenuResources from "./Menu/MenuResources";
 import MenuAbout from "./Menu/MenuAbout";
+import useNavbar from "@/hooks/useNavbar";
 
 const navTabs = [
     { name: "Solution", path: "/solution" },
@@ -23,26 +23,20 @@ const navTabs = [
     { name: "About", path: "/about" },
 ]
 
-interface NavbarProps {
-    darkMode: boolean;
+export interface NavbarProps {
+    darkMode?: boolean;
     activeMode: boolean;
-    setDarkMode: (darkMode: boolean) => void;
+    setDarkMode?: (darkMode: boolean) => void;
     setActiveMode: (activeMode: boolean) => void;
 }
 
 function Navbar({ darkMode, setActiveMode, activeMode }: NavbarProps) {
-    const [activeMenu, setActiveMenu] = useState<string | null>(null);
-
-    const handleMouseEnter = (tabName: string) => {
-        setActiveMenu(tabName);
-    };
-
-    const handleMouseLeave = () => {
-        setActiveMenu(null);
-    };
+    const {
+        activeMenu, setActiveMenu, handleMouseEnter, handleMouseLeave,
+    } = useNavbar({ setActiveMode, activeMode });
     return (
         <div
-            className={cn("w-full flex flex-col items-center absolute z-50 transition-all duration-300",
+            className={cn("w-full flex flex-col items-center fixed z-50 transition-all duration-300",
                 activeMode ? "bg-white text-black" : darkMode ? " text-white" : "",
             )}
             onMouseEnter={() => setActiveMode(true)}
@@ -51,16 +45,16 @@ function Navbar({ darkMode, setActiveMode, activeMode }: NavbarProps) {
             <div className={cn("w-full flex justify-center", activeMode ? "bg-white" : darkMode ? "bg-black/50" : "bg-white/50")}>
                 <div className={cn("h-[40px] w-[1520px] flex justify-end")}>
                     <div className="space-x-[30px] flex items-center">
-                        <div className="w-[22px] h-[22px]">
+                        <div className="w-[22px] h-[22px] cursor-pointer">
                             <SearchIcon color={activeMode ? "black" : darkMode ? "white" : "black"} />
                         </div>
-                        <div className="w-[22px] h-[22px]">
+                        <div className="w-[22px] h-[22px] cursor-pointer">
                             <ShopIcon color={activeMode ? "black" : darkMode ? "white" : "black"} />
                         </div>
-                        <div className="w-[22px] h-[22px]">
+                        <div className="w-[22px] h-[22px] cursor-pointer">
                             <GlobalIcon color={activeMode ? "black" : darkMode ? "white" : "black"} />
                         </div>
-                        <div className="w-[22px] h-[22px]">
+                        <div className="w-[22px] h-[22px] cursor-pointer">
                             <UserIcon color={activeMode ? "black" : darkMode ? "white" : "black"} />
                         </div>
                     </div>
@@ -76,7 +70,7 @@ function Navbar({ darkMode, setActiveMode, activeMode }: NavbarProps) {
                             {navTabs.map((tab) => (
                                 <div
                                     key={tab.name}
-                                    className="h-full cursor-pointer flex items-center"
+                                    className={cn("h-full cursor-pointer flex items-center", tab.name === activeMenu && "font-medium")}
                                     onMouseEnter={() => handleMouseEnter(tab.name)}
                                     onMouseLeave={handleMouseLeave}
                                 >
@@ -95,7 +89,7 @@ function Navbar({ darkMode, setActiveMode, activeMode }: NavbarProps) {
             {typeof document !== 'undefined' && createPortal(
                 activeMenu && (
                     <div
-                        className="absolute bg-white shadow-lg z-50 w-full flex justify-center"
+                        className="fixed bg-white shadow-lg z-50 w-full flex justify-center"
                         style={{
                             top: "104px", // 固定在导航栏下方
                         }}
