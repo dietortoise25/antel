@@ -1,44 +1,82 @@
+import { cn } from "@/lib/utils";
+import { useState } from "react";
 import ProductCard from "./ProductCard";
+const tabs = [
+    { name: "DC series" },
+    { name: "AC series" },
+]
 
 const ProductsInfo = [
     {
-        title: "CPO Charging",
-        description: "Innovate your business with Autel Smart Charging Network and invest for the future success. We offer both air-cooled fast charging and liquid-cooled ultra-fast charging solutions that are compatible with most vehicle models, ensuring fast and smooth charging experience with multiple payment methods.",
-        image: "/assets/Sessions/solution-card-1.png",
-        link: "#",
+        title: "MaxiCharger AC Pro",
+        description: "640 kW ultra fast charger",
+        image: "/assets/Sessions/Products/product-1.png",
+        series: "AC series"
     },
     {
-        title: "Fleet Charging",
-        description: "Innovate your business with Autel Smart Charging Network and invest for the future success. We offer both air-cooled fast charging and liquid-cooled ultra-fast charging solutions that are compatible with most vehicle models, ensuring fast and smooth charging experience with multiple payment methods.",
-        image: "/assets/Sessions/solution-card-2.png",
-        link: "#"
+        title: "MaxiCharger  AC Elite",
+        description: "Flexible installation, 40 kW DC charging",
+        image: "/assets/Sessions/Products/product-2.png",
+        series: "AC series"
     },
     {
-        title: "Destination Charging",
-        description: "Autel offers one-stop solution for business owners with enhanced reliability and ensure higher yields. With customized consultance, reliable design, intelligent software and global service network, we ensure long-term worry free charging experience.",
-        image: "/assets/Sessions/solution-card-3.png",
-        link: "#"
+        title: "MaxiCharge AC ultra",
+        description: "Versatile and efficient,19.2 kW*2 AC charging",
+        image: "/assets/Sessions/Products/product-3.png",
+        series: "AC series"
     },
     {
-        title: "Residential Charing",
-        description: "We strive to create an ultimate and seamless charging experience for desired homes with sleek design, top-tier reliability and superior charging efficiency. Our smart home charging solution optimizes charging power, prioritizes safety, and intelligently integrates green energy for future possibilities.",
-        image: "/assets/Sessions/solution-card-4.png",
-        link: "#"
-    }
+        title: "MaxiCharger DC Pro",
+        description: "640 kW ultra fast charger",
+        image: "/assets/Sessions/Products/product-1.png",
+        series: "DC series"
+    },
+    {
+        title: "MaxiCharger  DC Elite",
+        description: "Flexible installation, 40 kW DC charging",
+        image: "/assets/Sessions/Products/product-2.png",
+        series: "DC series"
+    },
+    {
+        title: "MaxiCharge DC ultra",
+        description: "Versatile and efficient,19.2 kW*2 DC charging",
+        image: "/assets/Sessions/Products/product-3.png",
+        series: "DC series"
+    },
 ]
-
 function ProductSection() {
+    const [activeTab, setActiveTab] = useState(0); // 0 for DC series, 1 for AC series
     return (
-        <div className="w-full bg-neutral-100 flex justify-center">
-            <div className="w-[1520px]">
-                <div className="text-zinc-900 text-6xl font-semibold mt-[120px] mb-[60px] text-center">Solution.</div>
-                {ProductsInfo.map((product, index) => (
-                    <ProductCard key={index}
-                        {...product}
-                        isOdd={index % 2 !== 0}
-                    />
-                ))
-                }
+        <div className="w-full h-full bg-white flex justify-center">
+            <div className="w-[1520px] mb-[104px]">
+                <div className="text-zinc-900 text-6xl font-semibold mt-[120px] mb-[42px] text-center">Products.</div>
+                <div className=" flex justify-center mb-[60px] ">
+                    <div className="w-[500px] h-20 bg-neutral-100 rounded-lg flex justify-between items-center px-[8px]">
+                        {tabs.map((tab, index) => (
+
+                            <div key={index}
+                                className={cn("w-60 h-16  flex justify-center items-center",
+                                    index === activeTab && "bg-white rounded-lg shadow-[0px_1px_10px_0px_rgba(0,0,0,0.05)]")}
+                            >
+                                <div
+                                    className=" text-zinc-900 text-2xl font-medium cursor-pointer"
+                                    onClick={() => setActiveTab(index)}
+                                >{tab.name}</div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <div className="flex justify-around">
+                    {ProductsInfo.map((product, index) => (
+                        product.series === tabs[activeTab].name && (
+                            <ProductCard key={index}
+                                {...product}
+                            />
+                        )
+                    ))
+                    }
+                </div>
+                <div className="bg-lime-200 flex justify-center mb-[136px]"></div>
             </div>
         </div>
     );
