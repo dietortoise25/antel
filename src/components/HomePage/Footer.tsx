@@ -1,8 +1,8 @@
 import FacebookIcon from "@/assets/Footer/FacebookIcon";
-import InsIcon from "@/assets/Footer/insIcon";
 import X from "@/assets/Footer/X";
 import Youtube from "@/assets/Footer/Youtube";
 import { Button } from "../ui/button";
+import InsIcon from "@/assets/Navbar/InsIcon";
 
 const footerContent = [
     { title: "Solutions", content: ["CPO", "Fleets", "Destination", "Home"] },
