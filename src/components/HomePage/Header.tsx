@@ -13,6 +13,8 @@ function Header() {
     const [api, setApi] = useState<CarouselApi>()
     const [current, setCurrent] = useState(0)
     const [darkMode, setDarkMode] = useState(true);
+    const [activeMode, setActiveMode] = useState(false);
+
 
     useEffect(() => {
         // eslint-disable-next-line @typescript-eslint/no-unused-expressions
@@ -34,7 +36,7 @@ function Header() {
     return (
         <div>
             {/* 轮播 */}
-            <Navbar darkMode={darkMode} />
+            <Navbar darkMode={darkMode} setDarkMode={setDarkMode} activeMode={activeMode} setActiveMode={setActiveMode} />
 
             <Carousel setApi={setApi} className="relative">
                 <CarouselContent>

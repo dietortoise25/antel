@@ -18,11 +18,11 @@ function Footer() {
             <div className="w-[1520px] h-full  flex flex-col">
                 <div className="w-full h-[350px] mt-[66px] border-b border-neutral-400 flex justify-between">
                     {footerContent.map((footer) => (
-                        <div className="w-full h-full">
+                        <div className="w-full h-full" key={footer.title}>
                             <div className="mb-[20px] text-zinc-900 text-base font-medium">{footer.title}</div>
                             <div className="text-stone-500 text-sm font-normal flex flex-col gap-[15px]">
-                                {footer.content.map((content) => (
-                                    <div className="cursor-pointer">{content}</div>
+                                {footer.content.map((content, index) => (
+                                    <div className="cursor-pointer" key={index}>{content}</div>
                                 ))}
                             </div>
                         </div>
@@ -56,7 +56,7 @@ function Footer() {
                 </div>
                 <div className="w-full h-[67px] flex">
                     <div className="w-[657px] h-full text-stone-500 text-xs font-normal flex items-center justify-between">
-                        <div>Privacy</div>          <div>Terms of Use</div>             <div>Legal Information   </div>           <div>Copyright © 2004-2021 AUTEL. All rights reserved.</div>
+                        <div>Privacy</div>          <div>Terms of Use</div>             <div>Legal Information</div>           <div>Copyright © 2004-2021 AUTEL. All rights reserved.</div>
                     </div>
                 </div>
             </div>
