@@ -89,7 +89,7 @@ function Navbar({ darkMode, setActiveMode, activeMode }: NavbarProps) {
             {typeof document !== 'undefined' && createPortal(
                 activeMenu && (
                     <div
-                        className="fixed bg-white shadow-lg z-50 w-full flex justify-center"
+                        className="fixed bg-white shadow-lg z-99 w-full flex justify-center"
                         style={{
                             top: "104px", // 固定在导航栏下方
                         }}
