@@ -10,9 +10,10 @@ import bg1 from '@/assets/Hero/bg-1.png'
 import bg2 from '@/assets/Hero/bg-2.png'
 import bg3 from '@/assets/Hero/bg-3.png'
 import useHeader from "@/hooks/useHeader";
+// import Autoplay from "embla-carousel-autoplay"
 
 const carouselItems = [
-    { bg: bg1, title: "Full-Scenario Intelligent Charging Network Solution", text: "Full-Scenario Intelligent Charging Network Solution", isDarkMode: false },
+    { bg: bg1, title: "Full-Scenario", text: "Intelligent Charging Network Solution", isDarkMode: false },
     { bg: bg2, title: "One-Stop ESS-EVSE Solution", text: "", isDarkMode: true },
     { bg: bg3, title: " Pioneering the Future of Digital Energy Through", text: "Solar, Storage, and Charging Excellence", isDarkMode: true },
 ]
@@ -31,10 +32,21 @@ function Header() {
 
     return (
         <div>
-            {/* 轮播 */}
             <Navbar darkMode={darkMode} setDarkMode={setDarkMode} activeMode={activeMode} setActiveMode={setActiveMode} />
 
-            <Carousel setApi={setApi} className="relative">
+            <Carousel
+                className="relative"
+                setApi={setApi}
+                opts={{
+                    align: "start",
+                    loop: true,
+                }}
+            // plugins={[
+            //     Autoplay({
+            //         delay: 2000,
+            //     }),
+            // ]}
+            >
                 <CarouselContent>
                     {carouselItems.map((item, index) => (
                         <CarouselItem key={index}>
@@ -59,9 +71,12 @@ function Header() {
                         </CarouselItem>
                     ))}
                 </CarouselContent>
-                {/* 遮罩 */}
+
+                {/* darkMode遮罩 */}
                 {darkMode && <div className="absolute top-0 w-full h-72 bg-gradient-to-b from-black/75 from 30% to-black/0" />
                 }
+
+                {/* 轮播图按钮 */}
                 <div className="absolute top-1/2 w-full  flex justify-center">
                     <div className="w-[1520px] flex justify-between">
                         <button className="size-16 hover:scale-110"
@@ -76,13 +91,18 @@ function Header() {
                         </button>
                     </div>
                 </div>
-                {/* indicator */}
+
+                {/* Indicator */}
                 <div className="w-[320px] flex justify-between items-center absolute h-[3px] bottom-49 left-1/2 -translate-x-1/2">
                     {carouselItems.map((_, index) => (
                         <button
                             key={index}
-                            className={`w-[100px]  h-full ${index === current ? 'bg-white' : 'bg-white/30'
-                                }`}
+                            // className={`w-[100px]  h-full ${index === current ? 'bg-white' : 'bg-white/30'
+                            //     }`}
+                            className={cn(
+                                "w-[100px] h-full",
+                                index === current ? "bg-white" : "bg-white/30",)
+                            }
                             onClick={() => handleIndicator(index)}
                         ></button>
                     ))}

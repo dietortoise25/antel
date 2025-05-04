@@ -36,7 +36,7 @@ function Navbar({ darkMode, setActiveMode, activeMode }: NavbarProps) {
     } = useNavbar({ setActiveMode, activeMode });
     return (
         <div
-            className={cn("w-full flex flex-col items-center fixed z-50 transition-all duration-300",
+            className={cn("w-full flex flex-col items-center fixed z-99 transition-all duration-300",
                 activeMode ? "bg-white text-black" : darkMode ? " text-white" : "",
             )}
             onMouseEnter={() => setActiveMode(true)}
@@ -119,8 +119,8 @@ function Navbar({ darkMode, setActiveMode, activeMode }: NavbarProps) {
                 ),
                 document.body
             )}
-
-            {/* <div className="w-screen h-screen absolute bg-black/50 -z-1"></div> */}
+            {/* 菜单遮罩 */}
+            {activeMenu !== null && <div className="fixed w-screen h-screen bg-black/50 z-50"></div>}
         </div >
     );
 }

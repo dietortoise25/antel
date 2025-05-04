@@ -3,6 +3,7 @@ import Header from "@/components/HomePage/Header";
 import ProductSection from "@/components/HomePage/ProductSection";
 import SoftwareSection from "@/components/HomePage/SoftwareSection";
 import SolutionSection from "@/components/HomePage/SolutionSection";
+import StrengthSection from "@/components/HomePage/StrengthSection";
 
 
 function HomePage() {
@@ -12,6 +13,7 @@ function HomePage() {
             <SolutionSection />
             <ProductSection />
             <SoftwareSection />
+            <StrengthSection />
             <Footer />
         </>
     );
