@@ -12,18 +12,17 @@ import bg1 from '@/assets/Hero/bg-1.png'
 import bg2 from '@/assets/Hero/bg-2.png'
 import bg3 from '@/assets/Hero/bg-3.png'
 
+const carouselItems = [
+    { bg: bg1, title: "Full-Scenario Intelligent Charging Network Solution", text: "Full-Scenario Intelligent Charging Network Solution", isDarkMode: false },
+    { bg: bg2, title: "One-Stop ESS-EVSE Solution", text: "", isDarkMode: true },
+    { bg: bg3, title: " Pioneering the Future of Digital Energy Through", text: "Solar, Storage, and Charging Excellence", isDarkMode: true },
+]
 
 function Header() {
     const [api, setApi] = useState<CarouselApi>()
     const [current, setCurrent] = useState(0)
-    const [darkMode, setDarkMode] = useState(true);
+    const [darkMode, setDarkMode] = useState(false);
     const [activeMode, setActiveMode] = useState(false);
-
-
-    useEffect(() => {
-        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-        current === 1 || current === 2 ? setDarkMode(true) : setDarkMode(false)
-    }, [current])
 
     useEffect(() => {
         if (!api) {
@@ -35,12 +34,10 @@ function Header() {
         })
     }, [api])
 
+    useEffect(() => {
+        setDarkMode(carouselItems[current].isDarkMode)
+    }, [current])
 
-    const carouselItems = [
-        { bg: bg1, title: "Full-Scenario Intelligent Charging Network Solution", text: "Full-Scenario Intelligent Charging Network Solution" },
-        { bg: bg2, title: "One-Stop ESS-EVSE Solution", text: "" },
-        { bg: bg3, title: " Pioneering the Future of Digital Energy Through", text: "Solar, Storage, and Charging Excellence" },
-    ]
     const handleIndicator = (index: number) => {
         api?.scrollTo(index)
     }
