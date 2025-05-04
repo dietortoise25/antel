@@ -82,7 +82,7 @@ function Navbar({ darkMode, setActiveMode, activeMode }: NavbarProps) {
                     <div className={cn("flex gap-[24px] items-center")}>
                         <div className="hover:text-green-400">MediaBank</div>
                         <div className="hover:text-green-400">Shop</div>
-                        <button className="bg-green-400 text-white py-2 px-4 rounded-md">Talk to An Expert</button>
+                        <button className="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-400 active:bg-green-600">Talk to An Expert</button>
                     </div>
                 </div>
             </div>

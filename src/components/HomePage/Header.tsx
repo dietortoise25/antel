@@ -7,6 +7,10 @@ import {
     type CarouselApi
 } from "@/components/ui/carousel"
 import arrowRight from "@/assets/Hero/Carousel/arrow-right.png"
+import { cn } from "@/lib/utils";
+import bg1 from '@/assets/Hero/bg-1.png'
+import bg2 from '@/assets/Hero/bg-2.png'
+import bg3 from '@/assets/Hero/bg-3.png'
 
 
 function Header() {
@@ -32,7 +36,14 @@ function Header() {
     }, [api])
 
 
-
+    const carouselItems = [
+        { bg: bg1, title: "Full-Scenario Intelligent Charging Network Solution", text: "Full-Scenario Intelligent Charging Network Solution" },
+        { bg: bg2, title: "One-Stop ESS-EVSE Solution", text: "" },
+        { bg: bg3, title: " Pioneering the Future of Digital Energy Through", text: "Solar, Storage, and Charging Excellence" },
+    ]
+    const handleIndicator = (index: number) => {
+        api?.scrollTo(index)
+    }
     return (
         <div>
             {/* 轮播 */}
@@ -40,59 +51,28 @@ function Header() {
 
             <Carousel setApi={setApi} className="relative">
                 <CarouselContent>
-                    <CarouselItem>
-                        <div>
-                            <div className="w-full h-[1080px] 
-                        bg-[url('@/assets/Hero/bg-1.png')] bg-cover bg-no-repeat flex justify-center"
-                            >
-                                <div className="mt-[225px]">
-                                    <div className="w-[1125px] h-32 text-center">
-                                        <span className="text-white text-5xl font-medium leading-[62px] [text-shadow:_0px_2px_2px_rgb(0_0_0_/_0.25)]">
-                                            Full-Scenario <br />
-                                        </span>
-                                        <span className="text-white text-6xl font-semibold leading-[62px] [text-shadow:_0px_2px_2px_rgb(0_0_0_/_0.25)]">
-                                            Intelligent Charging Network Solution
-                                        </span>
+                    {carouselItems.map((item, index) => (
+                        <CarouselItem key={index}>
+                            <div>
+                                <div
+                                    style={{ backgroundImage: `url(${item.bg})` }}
+                                    className={cn("w-full h-[1080px] bg-cover bg-no-repeat flex justify-center",)}
+                                >
+                                    <div className="mt-[225px]">
+                                        <div className="w-[1125px] h-32 text-center">
+                                            <span className="text-white text-5xl font-medium leading-[62px] [text-shadow:_0px_2px_2px_rgb(0_0_0_/_0.25)]">
+                                                {item.title} <br />
+                                            </span>
+                                            <span className="text-white text-6xl font-semibold leading-[62px] [text-shadow:_0px_2px_2px_rgb(0_0_0_/_0.25)]">
+                                                {item.text}
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
+
                             </div>
-
-                        </div>
-                    </CarouselItem>
-                    <CarouselItem>
-                        <div>
-                            <div className="w-full h-[1080px] 
-                        bg-[url('@/assets/Hero/bg-2.png')] bg-cover bg-no-repeat flex justify-center"
-                            >
-                                <div className="mt-[225px]">
-                                    <div className="w-[1125px] h-32 text-center">
-                                        <span className="text-white text-5xl font-medium leading-[62px] [text-shadow:_0px_2px_2px_rgb(0_0_0_/_0.25)]">
-                                            One-Stop ESS-EVSE Solution <br />
-                                        </span>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </CarouselItem>
-                    <CarouselItem>
-                        <div>
-                            <div className="w-full h-[1080px] 
-                        bg-[url('@/assets/Hero/bg-3.png')] bg-cover bg-no-repeat flex justify-center"
-                            >
-                                <div className="mt-[225px]">
-                                    <div className="w-[1125px] h-32 text-center">
-                                        <span className="text-white text-5xl font-medium leading-[62px] [text-shadow:_0px_2px_2px_rgb(0_0_0_/_0.25)]">
-                                            Pioneering the Future of Digital Energy Through
-                                            <br />Solar, Storage, and Charging Excellence
-                                        </span>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </CarouselItem>
-
+                        </CarouselItem>
+                    ))}
                 </CarouselContent>
                 {/* 遮罩 */}
                 {darkMode && <div className="absolute top-0 w-full h-72 bg-gradient-to-b from-black/75 from 30% to-black/0" />
@@ -110,6 +90,17 @@ function Header() {
                             <img src={arrowRight} alt="arrowRight" />
                         </button>
                     </div>
+                </div>
+                {/* indicator */}
+                <div className="w-[320px] flex justify-between items-center absolute h-[3px] bottom-49 left-1/2 -translate-x-1/2">
+                    {carouselItems.map((_, index) => (
+                        <button
+                            key={index}
+                            className={`w-[100px]  h-full ${index === current ? 'bg-white' : 'bg-white/30'
+                                }`}
+                            onClick={() => handleIndicator(index)}
+                        ></button>
+                    ))}
                 </div>
             </Carousel>
 

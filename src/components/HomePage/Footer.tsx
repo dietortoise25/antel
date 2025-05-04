@@ -31,21 +31,23 @@ function Footer() {
                     <div className="w-full h-full">
                         <div className="mb-[20px] text-zinc-900 text-base font-medium">Follow Autel</div>
                         <div className="w-[200px] h-6 flex justify-between">
-                            <div>
+                            <div className="cursor-pointer">
                                 <InsIcon />
                             </div>
-                            <div>
+                            <div className="cursor-pointer">
                                 <FacebookIcon />
                             </div>
-                            <div>
+                            <div className="cursor-pointer">
                                 <X />
                             </div>
-                            <div>
+                            <div className="cursor-pointer">
                                 <Youtube />
                             </div>
                         </div>
                         <div className="mt-[30px]">
-                            <Button variant="outline" className="text-green-500 text-base font-medium w-40 h-10 rounded-sm border border-green-500 bg-neutral-100">
+                            <Button variant="outline" className="text-green-500 text-base font-medium w-40 h-10 rounded-sm border border-green-500 bg-neutral-100
+                            hover:border-green-400 hover:text-green-400 cursor-pointer
+                            ">
                                 Become A Dealer
                             </Button>
                         </div>
