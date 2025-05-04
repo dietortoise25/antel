@@ -1,16 +1,15 @@
-import { useEffect, useState } from "react";
 import Navbar from "../Navbar";
 import {
     Carousel,
     CarouselContent,
     CarouselItem,
-    type CarouselApi
 } from "@/components/ui/carousel"
 import arrowRight from "@/assets/Hero/Carousel/arrow-right.png"
 import { cn } from "@/lib/utils";
 import bg1 from '@/assets/Hero/bg-1.png'
 import bg2 from '@/assets/Hero/bg-2.png'
 import bg3 from '@/assets/Hero/bg-3.png'
+import useHeader from "@/hooks/useHeader";
 
 const carouselItems = [
     { bg: bg1, title: "Full-Scenario Intelligent Charging Network Solution", text: "Full-Scenario Intelligent Charging Network Solution", isDarkMode: false },
@@ -19,28 +18,17 @@ const carouselItems = [
 ]
 
 function Header() {
-    const [api, setApi] = useState<CarouselApi>()
-    const [current, setCurrent] = useState(0)
-    const [darkMode, setDarkMode] = useState(false);
-    const [activeMode, setActiveMode] = useState(false);
+    const {
+        api,
+        setApi,
+        current,
+        darkMode,
+        activeMode,
+        setActiveMode,
+        handleIndicator,
+        setDarkMode
+    } = useHeader(carouselItems)
 
-    useEffect(() => {
-        if (!api) {
-            return
-        }
-        setCurrent(api.selectedScrollSnap())
-        api.on("select", () => {
-            setCurrent(api.selectedScrollSnap())
-        })
-    }, [api])
-
-    useEffect(() => {
-        setDarkMode(carouselItems[current].isDarkMode)
-    }, [current])
-
-    const handleIndicator = (index: number) => {
-        api?.scrollTo(index)
-    }
     return (
         <div>
             {/* 轮播 */}
