@@ -35,93 +35,98 @@ function Navbar({ darkMode, setActiveMode, activeMode }: NavbarProps) {
         activeMenu, setActiveMenu, handleMouseEnter, handleMouseLeave,
     } = useNavbar({ setActiveMode, activeMode });
     return (
-        <div
-            className={cn("w-full flex flex-col items-center fixed z-99 transition-all duration-300",
-                activeMode ? "bg-white text-black" : darkMode ? " text-white" : "",
-            )}
-            onMouseEnter={() => setActiveMode(true)}
-            onMouseLeave={() => setActiveMode(false)}
-        >
-            <div className={cn("w-full flex justify-center", activeMode ? "bg-white" : darkMode ? "bg-black/50" : "bg-white/50")}>
-                <div className={cn("h-[40px] w-[1520px] flex justify-end")}>
-                    <div className="space-x-[30px] flex items-center">
-                        <div className="w-[22px] h-[22px] cursor-pointer">
-                            <SearchIcon color={activeMode ? "black" : darkMode ? "white" : "black"} />
-                        </div>
-                        <div className="w-[22px] h-[22px] cursor-pointer">
-                            <ShopIcon color={activeMode ? "black" : darkMode ? "white" : "black"} />
-                        </div>
-                        <div className="w-[22px] h-[22px] cursor-pointer">
-                            <GlobalIcon color={activeMode ? "black" : darkMode ? "white" : "black"} />
-                        </div>
-                        <div className="w-[22px] h-[22px] cursor-pointer">
-                            <UserIcon color={activeMode ? "black" : darkMode ? "white" : "black"} />
+        <>
+            <div
+                className={cn("w-full flex flex-col items-center fixed z-99 transition-all duration-300",
+                    activeMode ? "bg-white text-black" : darkMode ? " text-white" : "",
+                )}
+                onMouseEnter={() => setActiveMode(true)}
+                onMouseLeave={() => setActiveMode(false)}
+            >
+                <div className={cn("w-full flex justify-center")}>
+                    <div className={cn("h-[40px] w-[1520px] flex justify-end")}>
+                        <div className="space-x-[30px] flex items-center">
+                            <div className="w-[22px] h-[22px] cursor-pointer">
+                                <SearchIcon color={activeMode ? "black" : darkMode ? "white" : "black"} />
+                            </div>
+                            <div className="w-[22px] h-[22px] cursor-pointer">
+                                <ShopIcon color={activeMode ? "black" : darkMode ? "white" : "black"} />
+                            </div>
+                            <div className="w-[22px] h-[22px] cursor-pointer">
+                                <GlobalIcon color={activeMode ? "black" : darkMode ? "white" : "black"} />
+                            </div>
+                            <div className="w-[22px] h-[22px] cursor-pointer">
+                                <UserIcon color={activeMode ? "black" : darkMode ? "white" : "black"} />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="h-[64px]">
-                <div className="w-[1520px] h-full flex justify-between  items-center">
-                    <div className="flex h-full gap-[50px] items-center">
-                        <Link to="/" className="w-[130px] h-[22px] ">
-                            <img src={logo} />
-                        </Link>
-                        <div className={cn("flex h-full gap-[30px]")}>
-                            {navTabs.map((tab) => (
-                                <div
-                                    key={tab.name}
-                                    className={cn("h-full cursor-pointer flex items-center", tab.name === activeMenu && "font-medium")}
-                                    onMouseEnter={() => handleMouseEnter(tab.name)}
-                                    onMouseLeave={handleMouseLeave}
-                                >
-                                    {tab.name}
-                                </div>
-                            ))}
+                <div className={cn("h-[64px] z-99 ",)}>
+                    <div className="w-[1520px] h-full flex justify-between  items-center">
+                        <div className="flex h-full gap-[50px] items-center">
+                            <Link to="/" className="w-[130px] h-[22px] ">
+                                <img src={logo} />
+                            </Link>
+                            <div className={cn("flex h-full gap-[30px]")}>
+                                {navTabs.map((tab) => (
+                                    <div
+                                        key={tab.name}
+                                        className={cn("h-full cursor-pointer flex items-center", tab.name === activeMenu && "font-medium")}
+                                        onMouseEnter={() => handleMouseEnter(tab.name)}
+                                        onMouseLeave={handleMouseLeave}
+                                    >
+                                        {tab.name}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        <div className={cn("flex gap-[24px] items-center")}>
+                            <div className="hover:text-green-400">MediaBank</div>
+                            <div className="hover:text-green-400">Shop</div>
+                            <button className="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-400 active:bg-green-600">Talk to An Expert</button>
                         </div>
                     </div>
-                    <div className={cn("flex gap-[24px] items-center")}>
-                        <div className="hover:text-green-400">MediaBank</div>
-                        <div className="hover:text-green-400">Shop</div>
-                        <button className="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-400 active:bg-green-600">Talk to An Expert</button>
-                    </div>
                 </div>
-            </div>
-            {typeof document !== 'undefined' && createPortal(
-                activeMenu && (
-                    <div
-                        className="fixed bg-white shadow-lg z-99 w-full flex justify-center"
-                        style={{
-                            top: "104px", // 固定在导航栏下方
-                        }}
-                        onMouseEnter={() => setActiveMenu(activeMenu)}
-                        onMouseLeave={handleMouseLeave}
-                    >
-                        {/* 根据activeMenu显示不同内容 */}
-                        {activeMenu === 'Solution' && (
-                            <MenuSolution />
-                        )}
-                        {activeMenu === 'Products' && (
-                            <MenuProducts />
-                        )}
-                        {activeMenu === 'Partners' && (
-                            <MenuPartners />
-                        )}
-                        {activeMenu === 'Service' && (
-                            <MenuService />
-                        )}
-                        {activeMenu === 'Resources' && (
-                            <MenuResources />
-                        )}
-                        {activeMenu === 'About' && (
-                            <MenuAbout />
-                        )}
-                    </div>
-                ),
-                document.body
-            )}
-            {/* 菜单遮罩 */}
-            {activeMenu !== null && <div className="fixed w-screen h-screen bg-black/50 z-50"></div>}
-        </div >
+                {
+                    typeof document !== 'undefined' && createPortal(
+                        activeMenu && (
+                            <div
+                                className="fixed bg-white shadow-lg z-99 w-full flex justify-center"
+                                style={{
+                                    top: "104px", // 固定在导航栏下方
+                                }}
+                                onMouseEnter={() => setActiveMenu(activeMenu)}
+                                onMouseLeave={handleMouseLeave}
+                            >
+                                {/* 根据activeMenu显示不同内容 */}
+                                {activeMenu === 'Solution' && (
+                                    <MenuSolution />
+                                )}
+                                {activeMenu === 'Products' && (
+                                    <MenuProducts />
+                                )}
+                                {activeMenu === 'Partners' && (
+                                    <MenuPartners />
+                                )}
+                                {activeMenu === 'Service' && (
+                                    <MenuService />
+                                )}
+                                {activeMenu === 'Resources' && (
+                                    <MenuResources />
+                                )}
+                                {activeMenu === 'About' && (
+                                    <MenuAbout />
+                                )}
+                            </div>
+                        ),
+                        document.body
+                    )
+                }
+                {/* 菜单遮罩 */}
+            </div >
+            {/* 改用class控制 */}
+            {<div className={cn("fixed w-screen h-screen bg-black/30 z-50 hidden", activeMenu !== null && "block")}></div>}
+        </>
     );
 }
 export default Navbar;

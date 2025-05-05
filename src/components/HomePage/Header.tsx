@@ -79,12 +79,12 @@ function Header() {
                 {/* 轮播图按钮 */}
                 <div className="absolute top-1/2 w-full  flex justify-center">
                     <div className="w-[1520px] flex justify-between">
-                        <button className="size-16 hover:scale-110"
+                        <button className="size-16 hover:scale-110 select-none"
                             onClick={() => api?.scrollTo(current - 1)}
                         >
                             <img src={arrowRight} alt="arrowRight" className="rotate-180" />
                         </button>
-                        <button className="size-16 hover:scale-110"
+                        <button className="size-16 hover:scale-110 select-none"
                             onClick={() => api?.scrollTo(current + 1)}
                         >
                             <img src={arrowRight} alt="arrowRight" />

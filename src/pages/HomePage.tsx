@@ -1,3 +1,5 @@
+import AchievedSection from "@/components/HomePage/AchievedSection";
+import ExpertSection from "@/components/HomePage/ExpertSection";
 import Footer from "@/components/HomePage/Footer";
 import Header from "@/components/HomePage/Header";
 import ProductSection from "@/components/HomePage/ProductSection";
@@ -14,6 +16,8 @@ function HomePage() {
             <ProductSection />
             <SoftwareSection />
             <StrengthSection />
+            <AchievedSection />
+            <ExpertSection />
             <Footer />
         </>
     );
