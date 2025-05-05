@@ -89,14 +89,15 @@ function Navbar({
                             </Link>
                             <div className={cn("flex h-full gap-[30px]")}>
                                 {navTabs.map((tab) => (
-                                    <div
+                                    <Link
+                                        to={tab.path}
                                         key={tab.name}
                                         className={cn("h-full cursor-pointer flex items-center", tab.name === activeMenu && "font-medium")}
                                         onMouseEnter={() => handleMouseEnter(tab.name)}
                                         onMouseLeave={handleMouseLeave}
                                     >
                                         {tab.name}
-                                    </div>
+                                    </Link>
                                 ))}
                             </div>
                         </div>

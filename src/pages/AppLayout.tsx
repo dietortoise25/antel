@@ -1,3 +1,4 @@
+import Footer from "@/components/HomePage/Footer";
 import Navbar from "@/components/Navbar";
 import useHeader from "@/hooks/useHeader";
 import { Outlet } from "react-router-dom";
@@ -10,6 +11,7 @@ function AppLayout() {
             <div className="pt-[104px]">
                 <Outlet />
             </div>
+            <Footer />
         </div>
     );
 }
