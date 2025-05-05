@@ -25,43 +25,63 @@ const navTabs = [
 
 export interface NavbarProps {
     darkMode?: boolean;
+    // setDarkMode?: (darkMode: boolean) => void;
     activeMode: boolean;
-    setDarkMode?: (darkMode: boolean) => void;
     setActiveMode: (activeMode: boolean) => void;
 }
 
-function Navbar({ darkMode, setActiveMode, activeMode }: NavbarProps) {
+function Navbar({
+    darkMode = false,
+    setActiveMode,
+    activeMode
+}: NavbarProps) {
     const {
         activeMenu, setActiveMenu, handleMouseEnter, handleMouseLeave,
     } = useNavbar({ setActiveMode, activeMode });
+    let navTopStyle = '';
+    let navBottomStyle = '';
+    let navAllStyle = '';
+    if (activeMode) {
+        navAllStyle = 'bg-white text-black';
+        navTopStyle = 'bg-white text-black';
+        navBottomStyle = 'bg-white text-black';
+    } else if (darkMode) {
+        navTopStyle = 'bg-black text-white';
+        navBottomStyle = 'bg-transparent text-white';
+    } else {
+        navTopStyle = 'bg-white/50 text-black';
+        navBottomStyle = 'bg-none text-black';
+    }
+
+
     return (
         <>
             <div
-                className={cn("w-full flex flex-col items-center fixed z-99 transition-all duration-300",
-                    activeMode ? "bg-white text-black" : darkMode ? " text-white" : "",
+                className={cn("fixed z-99 w-full flex flex-col items-center ",
+                    navAllStyle
                 )}
                 onMouseEnter={() => setActiveMode(true)}
                 onMouseLeave={() => setActiveMode(false)}
             >
-                <div className={cn("w-full flex justify-center")}>
-                    <div className={cn("h-[40px] w-[1520px] flex justify-end")}>
+                <div className={cn("w-full h-[40px] flex justify-center", navTopStyle)}>
+                    <div className={cn(" w-[1520px] h-full flex justify-end")}>
                         <div className="space-x-[30px] flex items-center">
                             <div className="w-[22px] h-[22px] cursor-pointer">
-                                <SearchIcon color={activeMode ? "black" : darkMode ? "white" : "black"} />
+                                <SearchIcon />
                             </div>
                             <div className="w-[22px] h-[22px] cursor-pointer">
-                                <ShopIcon color={activeMode ? "black" : darkMode ? "white" : "black"} />
+                                <ShopIcon />
                             </div>
                             <div className="w-[22px] h-[22px] cursor-pointer">
-                                <GlobalIcon color={activeMode ? "black" : darkMode ? "white" : "black"} />
+                                <GlobalIcon />
                             </div>
                             <div className="w-[22px] h-[22px] cursor-pointer">
-                                <UserIcon color={activeMode ? "black" : darkMode ? "white" : "black"} />
+                                <UserIcon />
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className={cn("h-[64px] z-99 ",)}>
+                <div className={cn("h-[64px] z-99 ", navBottomStyle)}>
                     <div className="w-[1520px] h-full flex justify-between  items-center">
                         <div className="flex h-full gap-[50px] items-center">
                             <Link to="/" className="w-[130px] h-[22px] ">

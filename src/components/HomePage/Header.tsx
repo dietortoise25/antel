@@ -18,6 +18,7 @@ const carouselItems = [
     { bg: bg3, title: " Pioneering the Future of Digital Energy Through", text: "Solar, Storage, and Charging Excellence", isDarkMode: true },
 ]
 
+
 function Header() {
     const {
         api,
@@ -27,12 +28,11 @@ function Header() {
         activeMode,
         setActiveMode,
         handleIndicator,
-        setDarkMode
     } = useHeader(carouselItems)
 
     return (
         <div>
-            <Navbar darkMode={darkMode} setDarkMode={setDarkMode} activeMode={activeMode} setActiveMode={setActiveMode} />
+            <Navbar darkMode={darkMode} activeMode={activeMode} setActiveMode={setActiveMode} />
 
             <Carousel
                 className="relative"

@@ -7,7 +7,7 @@ export interface CarouselItem {
   bg: string;
   isDarkMode: boolean;
 }
-export default function useHeader(carouselItems: CarouselItem[]) {
+export default function useHeader(carouselItems?: CarouselItem[]) {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [darkMode, setDarkMode] = useState(false);
@@ -24,6 +24,9 @@ export default function useHeader(carouselItems: CarouselItem[]) {
   }, [api]);
 
   useEffect(() => {
+    if (!carouselItems) {
+      return;
+    }
     setDarkMode(carouselItems[current].isDarkMode);
   }, [current, carouselItems]);
 
